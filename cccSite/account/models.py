@@ -50,7 +50,7 @@ class Member(models.Model):
 class GLogIn(models.Model):
     googleID = models.CharField(max_length=255, unique=True)
     # MEMBER_DELETE
-    referTo = models.ForeignKey(Member, on_delete = models.CASCADE)
+    referTo = models.ForeignKey(Member, on_delete = models.CASCADE, db_constraint=False)
     def __str__(self):
         return self.googleID + "|" + str(self.referTo)
 
@@ -72,7 +72,7 @@ class ManageForm(ModelForm):
 
 class UPLogIn(models.Model):
     # MEMBER_DELETE
-    referTo = models.ForeignKey(Member, on_delete = models.CASCADE)
+    referTo = models.ForeignKey(Member, on_delete = models.CASCADE, db_constraint=False)
     username = models.CharField(max_length=35, unique=True)
     salt = models.CharField(max_length=22)
     password = models.CharField(max_length=50)

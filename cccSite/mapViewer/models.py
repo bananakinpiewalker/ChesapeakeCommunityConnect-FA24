@@ -15,7 +15,7 @@ class Forum(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     
-    author = models.ForeignKey(Member, null=True, on_delete=models.SET_NULL, related_name="forums")
+    author = models.ForeignKey(Member, null=True, on_delete=models.SET_NULL, related_name="forums", db_constraint=False)
     
     description = models.TextField()
     geoCode = models.JSONField()
@@ -60,23 +60,23 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     
-    author = models.ForeignKey(Member, null=True, on_delete=models.SET_NULL, related_name="posts")
+    author = models.ForeignKey(Member, null=True, on_delete=models.SET_NULL, related_name="posts", db_constraint=False)
     
-    forum = models.ForeignKey(Forum, null=True, on_delete=models.SET_NULL, related_name="posts")
+    forum = models.ForeignKey(Forum, null=True, on_delete=models.SET_NULL, related_name="posts", db_constraint=False)
     
 
 class Comment(models.Model):
     content = models.TextField()
     
-    author = models.ForeignKey(Member, null=True, on_delete=models.SET_NULL, related_name="comments")
+    author = models.ForeignKey(Member, null=True, on_delete=models.SET_NULL, related_name="comments", db_constraint=False)
     
-    post = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL, related_name="comments")
+    post = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL, related_name="comments", db_constraint=False)
     
 class Reply(Comment):
     
-    parent = models.ForeignKey(Comment, null=True, on_delete=models.SET_NULL, related_name="children")
+    parent = models.ForeignKey(Comment, null=True, on_delete=models.SET_NULL, related_name="children", db_constraint=False)
     # It's not really a recipient. It's just the Reply object this Reply object is replying to. I can't think of a better word.
-    recipient = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL, related_name="replies")
+    recipient = models.ForeignKey("self", null=True, blank=True, on_delete=models.SET_NULL, related_name="replies", db_constraint=False)
     
     
     
@@ -89,8 +89,8 @@ def media_directory(instance, filename):
 
 class Media(models.Model):
     
-    forum = models.ForeignKey(Forum, on_delete=models.CASCADE, null=True, blank=True)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
+    forum = models.ForeignKey(Forum, on_delete=models.CASCADE, null=True, blank=True, db_constraint=False)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True, db_constraint=False)
     
     format_options = { 
         (0, "image"),
