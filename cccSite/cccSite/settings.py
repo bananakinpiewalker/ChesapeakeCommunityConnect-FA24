@@ -40,7 +40,7 @@ SECRET_KEY = 'django-insecure-rak*1&oe)cu7moh&u+(bq62$&taj$7gdx9-^48-4zs)v*v#_1f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['smcm-map-project.ue.r.appspot.com','localhost','127.0.0.1']
+ALLOWED_HOSTS = ['smcm-map-project.ue.r.appspot.com','localhost','127.0.0.1', '*']
 
 
 # Application definition
