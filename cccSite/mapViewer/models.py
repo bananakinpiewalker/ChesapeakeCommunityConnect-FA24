@@ -19,7 +19,7 @@ class Forum(models.Model):
     
     description = models.TextField()
     geoCode = models.JSONField()
-    tags = models.ManyToManyField(Tag, related_name="forums", blank=True)
+    tags = models.ManyToManyField(Tag, related_name="forums", blank=True, db_constraint=False)
     
     
     visible_options = { 
@@ -42,7 +42,7 @@ class Forum(models.Model):
     ]
     private_public = models.CharField(choices=private_public_choices, max_length=80)
     
-    contributors = models.ManyToManyField(Member, related_name="contributed_forums", blank=True)
+    contributors = models.ManyToManyField(Member, related_name="contributed_forums", blank=True, db_constraint=False)
     
     def __str__(self):
         return self.title + " by " + str(self.author)

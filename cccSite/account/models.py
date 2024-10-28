@@ -19,7 +19,7 @@ def user_directory_profile(instance, filename):
 # MEMBER_DELETE
 class Member(models.Model):
     # name = models.CharField(max_length=35)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, db_constraint=False)
     ranking_options = { 
         (-1,"banned"),
         (1 , "member"),
